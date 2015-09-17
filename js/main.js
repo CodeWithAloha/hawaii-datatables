@@ -2,8 +2,11 @@ var jqueryNoConflict = jQuery;
 
 // begin main function
 jqueryNoConflict(document).ready(function(){
-    var url = "https://docs.google.com/spreadsheets/d/1y_O2ayurKd4WZonv0RjAeuTsmVL6AzFv2Ex-988ikiQ/pubhtml";
-    initializeTabletopObject(url);
+    //var url = ["https://docs.google.com/spreadsheets/d", key, "pubhtml"].join("/");
+    //var key = "1y_O2ayurKd4WZonv0RjAeuTsmVL6AzFv2Ex-988ikiQ";
+    var key = "1UiIyfnvzRDTxt_0V7x6LXXw8_SyhRNcevx3eLCGVKIU";
+
+    initializeTabletopObject(key);
 });
 
 // pull data from google spreadsheet
@@ -16,32 +19,43 @@ function initializeTabletopObject(dataSpreadsheet){
     });
 }
 
-// create table headers
-function createTableColumns(){
-    var tableColumns = [
-      { "mDataProp": "id", "sTitle": "Id", "sClass": "center" },
-    ];
-    return tableColumns;
-}
 
 function writeTableWith(dataSource) {
+    var columns,
+        table;
 
-    console.log(dataSource);
+    console.log(JSON.stringify(dataSource));
 
-    jqueryNoConflict("#data-container").html("<table cellpadding='0' cellspacing='0' border='0' class='display table table-bordered table-striped' id='data-table-container'></table>");
+    // create table headers
+    columns = _
+        .chain(dataSource)
+        .reduce(_.merge)
+        .map(function(v,k) { return { mDataProp: k, sTitle: k }; })
+        .value();
 
-    var oTable = jqueryNoConflict("#data-table-container").dataTable({
+    table = jqueryNoConflict("<table/></table>");
+    table.attr({
+        celadding: 0,
+        cellspacing: 0,
+        border: 0,
+        class: "display table table-bordered table-striped"
+    });
+
+    // Autolink URLs
+    dataSource = _.map(dataSource, function(v) { return _.mapValues(v, function(v) { return v.autoLink(); }); });
+
+    table.DataTable({
         "iDisplayLength": 25,
         "aaData": dataSource,
-        "aoColumns": createTableColumns(),
-        "fnRowCallback": function(nRow, aData, iDisplayIndex) {
-            $("td:eq(2)", nRow).html("<a href='http://" + aData.website + "'>Website</a>");
-            return nRow;
-        },
+        "aoColumns": columns,
         "oLanguage": {
             "sLengthMenu": "_MENU_ records per page"
         }
     });
+
+    jqueryNoConflict("#data-container").replaceWith(table);
+
+
 };
 
 jQuery.fn.dataTableExt.oSort["string-case-asc"]  = function(x,y) {
@@ -51,4 +65,3 @@ jQuery.fn.dataTableExt.oSort["string-case-asc"]  = function(x,y) {
 jQuery.fn.dataTableExt.oSort["string-case-desc"] = function(x,y) {
 	return ((x < y) ?  1 : ((x > y) ? -1 : 0));
 };
-
