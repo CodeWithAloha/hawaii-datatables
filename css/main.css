@@ -196,3 +196,7 @@ textarea {
         page-break-after: avoid;
     }
 }
+
+footer {
+  text-align:center;
+}

@@ -35,7 +35,8 @@ function writeTableWith(dataSource) {
 
     table = jqueryNoConflict("<table/></table>");
     table.attr({
-        celadding: 0,
+        id: 'data-table-container',
+        cellpadding: 0,
         cellspacing: 0,
         border: 0,
         class: "display table table-bordered table-striped"
@@ -43,6 +44,8 @@ function writeTableWith(dataSource) {
 
     // Autolink URLs
     dataSource = _.map(dataSource, function(v) { return _.mapValues(v, function(v) { return v.autoLink(); }); });
+
+    jqueryNoConflict("#data-container").replaceWith(table);
 
     table.DataTable({
         "iDisplayLength": 25,
@@ -52,10 +55,6 @@ function writeTableWith(dataSource) {
             "sLengthMenu": "_MENU_ records per page"
         }
     });
-
-    jqueryNoConflict("#data-container").replaceWith(table);
-
-
 };
 
 jQuery.fn.dataTableExt.oSort["string-case-asc"]  = function(x,y) {
