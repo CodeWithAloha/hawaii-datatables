@@ -3,7 +3,7 @@ var jqueryNoConflict = jQuery;
 // begin main function
 jqueryNoConflict(document).ready(function(){
     //var url = ["https://docs.google.com/spreadsheets/d", key, "pubhtml"].join("/");
-    var key = "1UiIyfnvzRDTxt_0V7x6LXXw8_SyhRNcevx3eLCGVKIU";
+    var key = "1y_O2ayurKd4WZonv0RjAeuTsmVL6AzFv2Ex-988ikiQ";
     initializeTabletopObject(key);
 });
 
@@ -12,7 +12,7 @@ function initializeTabletopObject(dataSpreadsheet){
     Tabletop.init({
         key: dataSpreadsheet,
         callback: writeTableWith,
-        simpleSheet: true,
+        simpleSheet: false,
         debug: false
     });
 }
@@ -22,14 +22,21 @@ function writeTableWith(dataSource) {
     var columns,
         table;
 
-    console.log(JSON.stringify(dataSource));
-
     // create table headers
-    columns = _
-        .chain(dataSource)
-        .reduce(_.merge)
-        .map(function(v,k) { return { mDataProp: k, sTitle: k }; })
-        .value();
+    columns = [
+        {'mDataProp': 'id', 'sTitle': 'Url', 'sClass': 'center'},
+        {'mDataProp': 'name', 'sTitle': 'Name', 'sClass': 'center'},
+        {'mDataProp': 'description', 'sTitle': 'Description', 'sClass': 'center'},
+        {'mDataProp': 'license', 'sTitle': 'License', 'sClass': 'center'},
+        {'mDataProp': 'category', 'sTitle': 'Category', 'sClass': 'center'},
+        {'mDataProp': 'tags', 'sTitle': 'Tags', 'sClass': 'center'},
+        {'mDataProp': 'author', 'sTitle': 'Author', 'sClass': 'center'},
+        {'mDataProp': 'organization', 'sTitle': 'Organization', 'sClass': 'center'},
+        {'mDataProp': 'department', 'sTitle': 'Department', 'sClass': 'center'},
+        {'mDataProp': 'division', 'sTitle': 'Division', 'sClass': 'center'},
+        {'mDataProp': 'attribution', 'sTitle': 'Attribution', 'sClass': 'center'},
+        {'mDataProp': 'last_updated', 'sTitle': 'Last Updated', 'sClass': 'center'}
+    ];
 
     table = jqueryNoConflict("<table/></table>");
     table.attr({
@@ -40,14 +47,19 @@ function writeTableWith(dataSource) {
         class: "display table table-bordered table-striped"
     });
 
+    concatenated_data = dataSource["manual"].elements.concat(
+            dataSource["top-100-data.honolulu.gov"].elements,
+            dataSource["top-100-data.hawaii.gov"].elements
+        );
+
     // Autolink URLs
-    dataSource = _.map(dataSource, function(v) { return _.mapValues(v, function(v) { return v.autoLink(); }); });
+    // dataSource = _.map(dataSource, function(v) { return _.mapValues(v, function(v) { return v.autoLink(); }); });
 
     jqueryNoConflict("#data-container").replaceWith(table);
 
     table.DataTable({
         "iDisplayLength": 25,
-        "aaData": dataSource,
+        "aaData": concatenated_data,
         "aoColumns": columns,
         "oLanguage": {
             "sLengthMenu": "_MENU_ records per page"
