@@ -3,9 +3,7 @@ var jqueryNoConflict = jQuery;
 // begin main function
 jqueryNoConflict(document).ready(function(){
     //var url = ["https://docs.google.com/spreadsheets/d", key, "pubhtml"].join("/");
-    //var key = "1y_O2ayurKd4WZonv0RjAeuTsmVL6AzFv2Ex-988ikiQ";
     var key = "1UiIyfnvzRDTxt_0V7x6LXXw8_SyhRNcevx3eLCGVKIU";
-
     initializeTabletopObject(key);
 });
 
