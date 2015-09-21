@@ -197,6 +197,26 @@ textarea {
     }
 }
 
+/* Custom */
+
 footer {
   text-align:center;
+}
+
+div.jumbotron {
+   position: relative;
+   background: none;
+   border-bottom:10px solid #265A88; /* CHANGEME */
+}
+
+div.jumbotron:after {
+   content:"";
+   background: url('/img/background.jpg');
+   opacity: 0.25;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   position: absolute;
+   z-index: -1;
 }
