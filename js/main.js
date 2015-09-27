@@ -20,6 +20,7 @@ function initializeTabletopObject(dataSpreadsheet){
 
 function writeTableWith(dataSource) {
     var columns,
+        concatenated_data,
         table;
 
     // create table headers
@@ -53,7 +54,7 @@ function writeTableWith(dataSource) {
         );
 
     // Autolink URLs
-    // dataSource = _.map(dataSource, function(v) { return _.mapValues(v, function(v) { return v.autoLink(); }); });
+    concatenated_data = _.map(concatenated_data, function(v) { return _.mapValues(v, function(v) { return v.autoLink(); }); });
 
     jqueryNoConflict("#data-container").replaceWith(table);
 
