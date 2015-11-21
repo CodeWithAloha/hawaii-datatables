@@ -19,17 +19,15 @@ feed the data into the website from the spreadsheet.
 Getting Started
 ===============
 
-To get started with this project, you'll need to make sure you have the
-following installed.
+To get started with this project, the only thing you'll need is a tool/webserver that can serve
+files over http. I typically use python since it's installed by default in
+most disitributions and with a short one-liner, you can server static files.
 
-  * [NodeJS](https://nodejs.org/en/)
-  * [Bower](http://bower.io/)
+```shell
+python -c $'import SimpleHTTPServer;\nSimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map[""] = "text/plain";\nSimpleHTTPServer.test();' "50001"
+```
 
-Once installed, run the following:
-
-  * `bower install`
-  * `python -c $'import SimpleHTTPServer;\nSimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map[""] = "text/plain";\nSimpleHTTPServer.test();' "50001"`
-  * open your browser pointed @ [http://localhost:50001/index.html](http://localhost:50001/index.html])
+Open your browser pointed @ [http://localhost:50001/index.html](http://localhost:50001/index.html)
 
 
 Contributing
