@@ -21,7 +21,9 @@ Getting Started
 
 To get started with this project, the only thing you'll need is a tool/webserver that can serve
 files over http. I typically use python since it's installed by default in
-most disitributions and with a short one-liner, you can server static files.
+most disitributions and with a short one-liner, you can serve static files.
+
+Cut and paste the following python snippet into your terminal:
 
 ```shell
 python -c $'import SimpleHTTPServer;\nSimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map[""] = "text/plain";\nSimpleHTTPServer.test();' "50001"
