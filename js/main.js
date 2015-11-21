@@ -18,7 +18,8 @@ function initializeTabletopObject(dataSpreadsheet){
 }
 
 
-function writeTableWith(dataSource) {
+function writeTableWith(data, tabletop) {
+
     var columns,
         concatenated_data,
         table;
@@ -48,19 +49,20 @@ function writeTableWith(dataSource) {
         class: "display table table-bordered table-striped"
     });
 
-    concatenated_data = dataSource["manual"].elements.concat(
-            dataSource["top-100-data.honolulu.gov"].elements,
-            dataSource["top-100-data.hawaii.gov"].elements
-        );
+    // Get all the data
+    var all_data =
+      (tabletop.simpleSheet) ?
+        tabletop.data() :
+        _.reduce(tabletop.sheets(), function(memo, num){ return memo.concat(num.all()); }, []);
 
     // Autolink URLs
-    concatenated_data = _.map(concatenated_data, function(v) { return _.mapValues(v, function(v) { return v.autoLink(); }); });
+    all_data = _.map(all_data, function(v) { return _.mapValues(v, function(v) { return v.autoLink(); }); });
 
     jqueryNoConflict("#data-container").replaceWith(table);
 
     table.DataTable({
         "iDisplayLength": 25,
-        "aaData": concatenated_data,
+        "aaData": all_data,
         "aoColumns": columns,
         "oLanguage": {
             "sLengthMenu": "_MENU_ records per page"
