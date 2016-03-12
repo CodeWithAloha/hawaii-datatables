@@ -211,7 +211,7 @@ div.jumbotron {
 
 div.jumbotron:after {
    content:"";
-   background: url('/img/background.jpg');
+   background: url('img/background.jpg');
    opacity: 0.25;
    top: 0;
    left: 0;
