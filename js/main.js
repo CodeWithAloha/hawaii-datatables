@@ -1,7 +1,5 @@
-var jqueryNoConflict = jQuery;
-
 // begin main function
-jqueryNoConflict(document).ready(function(){
+$(document).ready(function(){
     //var url = ["https://docs.google.com/spreadsheets/d", key, "pubhtml"].join("/");
     var key = "1ugRl6rdtIQMODwvTJXMnoXT4pd8vt4qewvWQ8kxdNtk";
     initializeTabletopObject(key);
@@ -30,7 +28,7 @@ function writeTableWith(data, tabletop) {
         {'mDataProp': 'description', 'sTitle': 'Description', 'sClass': 'center'},
     ];
 
-    table = jqueryNoConflict("<table/></table>");
+    table = $("<table/></table>");
     table.attr({
         id: 'data-table-container',
         cellpadding: 0,
@@ -45,17 +43,14 @@ function writeTableWith(data, tabletop) {
         tabletop.data() :
         _.reduce(tabletop.sheets(), function(memo, num){ return memo.concat(num.all()); }, []);
 
-    // Autolink / timestamps
-    // TODO: To be generic, this should be passed in from the caller
     all_data = _.map(all_data, function(v) {
         var linkedName = '<a href="'+v.url+'">'+v.name+'</a>';
         return { name: linkedName, description: v.description };
     });
 
-    jqueryNoConflict("#data-container").replaceWith(table);
+    $("#data-container").replaceWith(table);
 
     table.DataTable({
-        "iDisplayLength": 200,
         "paging": false,
         "aaData": all_data,
         "aoColumns": columns,
