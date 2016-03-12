@@ -41,7 +41,9 @@ function writeTableWith(data, tabletop) {
     var all_data =
       (tabletop.simpleSheet) ?
         tabletop.data() :
-        _.reduce(tabletop.sheets(), function(memo, num){ return memo.concat(num.all()); }, []);
+        _.reduce(tabletop.sheets(), function(memo, num){ 
+        	return memo.concat(num.all()); 
+        }, []);
 
     all_data = _.map(all_data, function(v) {
         var linkedName = '<a href="'+v.url+'">'+v.name+'</a>';
