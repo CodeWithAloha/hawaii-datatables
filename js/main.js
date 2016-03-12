@@ -55,7 +55,8 @@ function writeTableWith(data, tabletop) {
     jqueryNoConflict("#data-container").replaceWith(table);
 
     table.DataTable({
-        "iDisplayLength": 150,
+        "iDisplayLength": 200,
+        "paging", false,
         "aaData": all_data,
         "aoColumns": columns,
         "oLanguage": {
