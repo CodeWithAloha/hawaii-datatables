@@ -49,7 +49,7 @@ function writeTableWith(data, tabletop) {
     // TODO: To be generic, this should be passed in from the caller
     all_data = _.map(all_data, function(v) {
         var linkedName = '<a href="'+v.url+'">'+v.name+'</a>';
-        return { name: linkedName, description: description };
+        return { name: linkedName, description: v.description };
     });
 
     jqueryNoConflict("#data-container").replaceWith(table);
