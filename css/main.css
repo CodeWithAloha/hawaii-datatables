@@ -211,7 +211,7 @@ div.jumbotron {
 
 div.jumbotron:after {
    content:"";
-   background: url('/img/background.jpg');
+   background: url('../img/background.jpg');
    opacity: 0.25;
    top: 0;
    left: 0;
@@ -221,10 +221,3 @@ div.jumbotron:after {
    z-index: -1;
 }
 
-#data-table-container_filter label {
-  background-color:#f9f9f9;
-  border:1px solid #265A88;
-  padding:.5em;
-  font-weight:bold;
-  font-size:1.1em;
-}
