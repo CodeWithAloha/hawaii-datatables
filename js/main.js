@@ -26,7 +26,6 @@ function writeTableWith(data, tabletop) {
 
     // create table headers
     columns = [
-        {'mDataProp': 'url', 'sTitle': 'Url', 'sClass': 'center'},
         {'mDataProp': 'name', 'sTitle': 'Name', 'sClass': 'center'},
         {'mDataProp': 'description', 'sTitle': 'Description', 'sClass': 'center'},
     ];
@@ -49,8 +48,8 @@ function writeTableWith(data, tabletop) {
     // Autolink / timestamps
     // TODO: To be generic, this should be passed in from the caller
     all_data = _.map(all_data, function(v) {
-      return _.mapValues(v, function(v,k,o) {
-        return (k == "last_updated" && v) ? convertTimestamp(v) : v.autoLink();
+        var linkedName = '<a href="'+v.url+'">'+v.name+'</a>';
+        return { name: linkedName, description: description };
     })});
 
     jqueryNoConflict("#data-container").replaceWith(table);
