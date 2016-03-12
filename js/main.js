@@ -3,7 +3,7 @@ var jqueryNoConflict = jQuery;
 // begin main function
 jqueryNoConflict(document).ready(function(){
     //var url = ["https://docs.google.com/spreadsheets/d", key, "pubhtml"].join("/");
-    var key = "1y_O2ayurKd4WZonv0RjAeuTsmVL6AzFv2Ex-988ikiQ";
+    var key = "1ugRl6rdtIQMODwvTJXMnoXT4pd8vt4qewvWQ8kxdNtk";
     initializeTabletopObject(key);
 });
 
@@ -26,18 +26,9 @@ function writeTableWith(data, tabletop) {
 
     // create table headers
     columns = [
-        {'mDataProp': 'id', 'sTitle': 'Url', 'sClass': 'center'},
+        {'mDataProp': 'url', 'sTitle': 'Url', 'sClass': 'center'},
         {'mDataProp': 'name', 'sTitle': 'Name', 'sClass': 'center'},
         {'mDataProp': 'description', 'sTitle': 'Description', 'sClass': 'center'},
-        {'mDataProp': 'license', 'sTitle': 'License', 'sClass': 'center'},
-        {'mDataProp': 'category', 'sTitle': 'Category', 'sClass': 'center'},
-        {'mDataProp': 'tags', 'sTitle': 'Tags', 'sClass': 'center'},
-        {'mDataProp': 'author', 'sTitle': 'Author', 'sClass': 'center'},
-        {'mDataProp': 'organization', 'sTitle': 'Organization', 'sClass': 'center'},
-        {'mDataProp': 'department', 'sTitle': 'Department', 'sClass': 'center'},
-        {'mDataProp': 'division', 'sTitle': 'Division', 'sClass': 'center'},
-        {'mDataProp': 'attribution', 'sTitle': 'Attribution', 'sClass': 'center'},
-        {'mDataProp': 'last_updated', 'sTitle': 'Last Updated', 'sClass': 'center'}
     ];
 
     table = jqueryNoConflict("<table/></table>");
@@ -65,7 +56,7 @@ function writeTableWith(data, tabletop) {
     jqueryNoConflict("#data-container").replaceWith(table);
 
     table.DataTable({
-        "iDisplayLength": 25,
+        "iDisplayLength": 150,
         "aaData": all_data,
         "aoColumns": columns,
         "oLanguage": {
