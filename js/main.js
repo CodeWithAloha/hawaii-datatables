@@ -50,7 +50,7 @@ function writeTableWith(data, tabletop) {
     all_data = _.map(all_data, function(v) {
         var linkedName = '<a href="'+v.url+'">'+v.name+'</a>';
         return { name: linkedName, description: description };
-    })});
+    });
 
     jqueryNoConflict("#data-container").replaceWith(table);
 
